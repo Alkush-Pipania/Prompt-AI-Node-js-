@@ -7,15 +7,16 @@ import { ChatService } from './services/chat.service';
 import { systemPrompts } from './config/environment';
 import { ChatController } from './controller/chat.controller';
 import { createChatRouter } from './routes/generation';
-
+import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-const model = new ChatAnthropic({
-  anthropicApiKey: process.env.ANTHROPIC_API_KEY!,
-  modelName: "claude-3-5-sonnet-20241022"
+const model = new ChatGoogleGenerativeAI({
+  model: "gemini-2.0-flash",
+  temperature: 0.7,
+  maxRetries: 2,
 });
 
 const chatService = new ChatService(model, systemPrompts);

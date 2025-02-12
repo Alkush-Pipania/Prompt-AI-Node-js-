@@ -8,6 +8,7 @@ import { z } from 'zod';
 import { prisma } from './db.service';
 import { Chat, Conversation } from '../types/index';
 import { Role } from '@prisma/client';
+import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 
 export class ChatService {
   private outputParser = StructuredOutputParser.fromZodSchema(
@@ -20,10 +21,10 @@ export class ChatService {
   );
 
   private formatInstructions: string;
-  private model: ChatAnthropic;
+  private model: ChatGoogleGenerativeAI;
   private systemPrompts: Record<string, string>;
 
-  constructor(model: ChatAnthropic, systemPrompts: Record<string, string>) {
+  constructor(model: ChatGoogleGenerativeAI, systemPrompts: Record<string, string>) {
     this.model = model;
     this.systemPrompts = systemPrompts;
     this.formatInstructions = this.outputParser.getFormatInstructions();
