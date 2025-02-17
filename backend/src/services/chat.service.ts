@@ -46,6 +46,10 @@ export class ChatService {
   }
 
   private async saveConversation(chatId: string, content: string, role: Role): Promise<Conversation> {
+    await prisma.chat.update({
+      where: { id : chatId},
+      data : { updatedAt : new Date()}
+    })
     return await prisma.conversation.create({
       data: {
         content,

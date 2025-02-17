@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { ChatService } from '../services/chat.service';
 import { prisma } from '../services/db.service';
+import { format, isToday, isYesterday, subDays } from 'date-fns';
 
 export class ChatController {
   private chatService: ChatService;
@@ -60,7 +61,27 @@ export class ChatController {
         },
         orderBy: { updatedAt: 'desc' }
       });
-      res.status(200).json(chats);
+
+      // group chat by date
+      const groupedChats = {
+        today: [] as any[],
+        yesterday: [] as any[],
+        older: [] as any[]
+      };
+
+      chats.forEach(chat => {
+        const chatDate = new Date(chat.updatedAt);
+        
+        if (isToday(chatDate)) {
+          groupedChats.today.push(chat);
+        } else if (isYesterday(chatDate)) {
+          groupedChats.yesterday.push(chat);
+        } else {
+          groupedChats.older.push(chat);
+        }
+      });
+
+      res.status(200).json(groupedChats);
     } catch (error) {
       res.status(500).json({
         error: "Error fetching user chats",
