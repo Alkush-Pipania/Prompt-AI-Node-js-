@@ -6,24 +6,7 @@ import { ChatInput } from '@/components/chat/chat-input';
 export default function NewChatPage() {
   const router = useRouter();
 
-  const handleSendMessage = async (message: string) => {
-    try {
-      const response = await fetch('/api/chat/new', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message }),
-      });
 
-      if (!response.ok) throw new Error('Failed to create chat');
-
-      const data = await response.json();
-      router.push(`/chat/${data.chatId}`);
-    } catch (error) {
-      console.error('Error creating chat:', error);
-    }
-  };
 
   return (
     <div className="container mx-auto max-w-4xl h-full">
@@ -37,7 +20,7 @@ export default function NewChatPage() {
       </div>
       <div className="fixed bottom-0 left-0 right-0 p-4  md:left-72">
         <div className="container mx-auto max-w-4xl">
-          <ChatInput onSendMessage={handleSendMessage} />
+          <ChatInput onSendMessage={()=> console.log('hello')} />
         </div>
       </div>
     </div>

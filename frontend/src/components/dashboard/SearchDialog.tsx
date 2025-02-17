@@ -6,10 +6,10 @@ import * as React from "react"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { ChatList } from "./_subcomponent/chat-List"
 import { SearchBar } from "./_subcomponent/search-bar"
+import { useDialogStore } from "@/store/chatStore"
 
 export function ChatDialog() {
-  const [open, setOpen] = React.useState(true)
-
+  const {open , setOpen} = useDialogStore()
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTitle  />
