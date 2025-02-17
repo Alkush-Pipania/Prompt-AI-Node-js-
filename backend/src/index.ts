@@ -8,6 +8,7 @@ import { systemPrompts } from './config/environment';
 import { ChatController } from './controller/chat.controller';
 import { createChatRouter } from './routes/generation';
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
+import session from "express-session";
 
 const app = express();
 
@@ -19,6 +20,7 @@ const model = new ChatGoogleGenerativeAI({
   maxRetries: 2,
 });
 
+// app.use(session({ secret: "your-secret", resave: false, saveUninitialized: true }));
 const chatService = new ChatService(model, systemPrompts);
 const chatController = new ChatController(chatService);
 const chatRouter = createChatRouter(chatController);

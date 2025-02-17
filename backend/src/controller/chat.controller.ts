@@ -57,10 +57,6 @@ export class ChatController {
       const chats = await prisma.chat.findMany({
         where: { userId },
         include: {
-          conversations: {
-            orderBy: { timestamp: 'desc' },
-            take: 1
-          }
         },
         orderBy: { updatedAt: 'desc' }
       });

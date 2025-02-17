@@ -44,6 +44,7 @@ router.post("/", async (req: any, res: any) => {
     res.status(201).json({
       success: true,
       token,
+      userId : check_user.id,
     })
 
 
