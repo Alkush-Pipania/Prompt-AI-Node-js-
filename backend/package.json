@@ -23,6 +23,8 @@
     "ts-node": "^10.9.2"
   },
   "dependencies": {
+    "@clerk/backend": "^1.24.3",
+    "@clerk/clerk-sdk-node": "^5.1.6",
     "@huggingface/transformers": "^3.3.3",
     "@langchain/anthropic": "^0.3.13",
     "@langchain/azure-openai": "^0.0.11",

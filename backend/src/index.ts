@@ -2,13 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import authRouter from './routes/auth';
 import authMiddleware from './middleware';
-import { ChatAnthropic } from '@langchain/anthropic';
 import { ChatService } from './services/chat.service';
 import { systemPrompts } from './config/environment';
 import { ChatController } from './controller/chat.controller';
 import { createChatRouter } from './routes/generation';
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
-import session from "express-session";
 
 const app = express();
 
